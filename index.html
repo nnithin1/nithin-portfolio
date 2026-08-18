@@ -1,97 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="blue">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nithin N — Cyber Defence Engineer</title>
-  <meta name="description" content="Nithin N is a Cyber Defence Engineer with 7+ years of experience in endpoint detection, vulnerability management, email security, and SOC operations.">
+  <title>Nithin N - Cyber Defence Engineer</title>
+  <meta name="description" content="Nithin N is a Cyber Defence Engineer with 7+ years building enterprise security programs - EDR, vulnerability management, email security, WAF, and SOC operations.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ›¡ï¸</text></svg>">
 </head>
 <body>
+  <!-- Custom Cursor -->
+  <div class="cyber-cursor" id="cyberCursor"></div>
+  <div class="cyber-cursor-trail" id="cyberCursorTrail"></div>
+  
+  <!-- Threat Feed Ticker -->
+  <div class="threat-ticker">
+    <div class="threat-ticker__label">INTEL</div>
+    <div class="threat-ticker__scroll">
+      <div class="threat-ticker__inner" id="threatTicker">
+        <span>ESTABLISHING SECURE CONNECTION TO THREAT INTEL NETWORK...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Easter Egg Overlays -->
+  <div class="easter-egg-overlay" id="matrixOverlay">
+    <canvas id="matrixCanvas"></canvas>
+    <div class="easter-egg-msg" id="matrixMsg">ACCESS GRANTED</div>
+  </div>
+  <div class="easter-egg-overlay breach-overlay" id="breachOverlay">
+    <div class="breach-content">
+      <div class="breach-icon">âš ï¸</div>
+      <div class="breach-title">BREACH DETECTED</div>
+      <div class="breach-sub">Scanning perimeter...</div>
+      <div class="breach-resolve" id="breachResolve">False alarm. Perimeter secure. ðŸ›¡ï¸</div>
+    </div>
+  </div>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="container nav__inner">
-      <a href="#" class="nav__logo" aria-label="Home">&lt;N<span>/</span>&gt;</a>
+      <a href="#" class="nav__logo" aria-label="Home">NITHIN.SEC</a>
       <ul class="nav__links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#achievements">Impact</a></li>
         <li><a href="#education">Education</a></li>
+        <li><a href="#terminal">Terminal</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <!-- Actions -->
+      <div class="nav__actions">
+        <div class="theme-toggle" id="modeToggle" title="Toggle Light/Dark Mode" style="margin-right:1.5rem;">
+          <span class="theme-toggle__label mode-toggle__label--dark" style="transition:color 0.2s;">DARK</span>
+          <div class="theme-toggle__switch">
+            <div class="theme-toggle__dot mode-dot" style="transition:all 0.2s;"></div>
+          </div>
+          <span class="theme-toggle__label mode-toggle__label--light" style="transition:color 0.2s;">LIGHT</span>
+        </div>
+        <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" title="Sound Effects">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sound-icon-on" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sound-icon-off"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-toggle__label theme-toggle__label--blue">BLUE</span>
+          <span class="theme-toggle__switch">
+            <span class="theme-toggle__dot"></span>
+          </span>
+          <span class="theme-toggle__label theme-toggle__label--red">RED</span>
+        </button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
     <div class="nav__overlay" id="navOverlay"></div>
   </nav>
 
   <!-- Hero -->
   <section class="hero" id="about">
-    <div class="hero__bg">
-      <div class="hero__gradient hero__gradient--1"></div>
-      <div class="hero__gradient hero__gradient--2"></div>
-    </div>
-    <div class="container hero__content">
-      <div class="hero__tag reveal">
-      <h1 class="hero__name reveal reveal-delay-1">Nithin N</h1>
-      <p class="hero__title reveal reveal-delay-2">Cyber Defence Engineer · Information Security</p>
-      <p class="hero__summary reveal reveal-delay-3">
-        Building and operating enterprise security programs across EDR, vulnerability management, email security, mobile threat defense, and WAF. 
-        Track record of zero-impact migrations, SOC automation, and measurable risk reduction.
-      </p>
-      <div class="hero__stats reveal reveal-delay-3">
-        <div class="stat">
-          <div class="stat__value" data-count="7">0</div>
-          <div class="stat__label">Years Experience</div>
+    <div class="hero__vignette"></div>
+    <div class="container hero__layout">
+      <div class="hero__content">
+        <div class="hero__terminal-line reveal">
+          <span class="prompt"></span>
+          <span class="path">~/security</span>
+          <span class="cmd">whoami</span>
         </div>
-        <div class="stat">
-          <div class="stat__value" data-count="60" data-suffix="%">0</div>
-          <div class="stat__label">Vuln Reduction</div>
+        <h1 class="hero__name reveal reveal-delay-1"><span class="glitch">Nithin N</span></h1>
+        <div class="hero__role reveal reveal-delay-2" id="typedRole">
+          <span id="typedText"></span><span class="cursor"></span>
         </div>
-        <div class="stat">
-          <div class="stat__value" data-prefix="$" data-count="150" data-suffix="K+">0</div>
-          <div class="stat__label">Vendor Savings</div>
+        <p class="hero__summary reveal reveal-delay-3">
+          7 years building and operating enterprise security programs - from EDR migrations and SOAR automation 
+          to vulnerability management and SOC leadership. Promoted twice for measurable risk reduction.
+        </p>
+
+        <div class="hero__metrics reveal reveal-delay-3">
+          <div class="metric">
+            <div class="metric__value" data-count="7">0</div>
+            <div class="metric__label">Years</div>
+          </div>
+          <div class="metric">
+            <div class="metric__value" data-count="60" data-suffix="%">0</div>
+            <div class="metric__label">Vuln Cut</div>
+          </div>
+          <div class="metric">
+            <div class="metric__value" data-prefix="$" data-count="150" data-suffix="K">0</div>
+            <div class="metric__label">Saved</div>
+          </div>
+          <div class="metric">
+            <div class="metric__value" data-count="75" data-suffix="%">0</div>
+            <div class="metric__label">CIS Score</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat__value" data-count="75" data-suffix="%">0</div>
-          <div class="stat__label">CIS Compliance</div>
+
+        <div class="hero__actions reveal reveal-delay-4">
+          <a href="#contact" class="btn btn--primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Get in Touch
+          </a>
+          <button class="btn btn--outline" id="downloadResume">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Resume
+          </button>
+          <a href="https://www.linkedin.com/in/nithin-n-4316027b/" target="_blank" rel="noopener" class="btn btn--outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
         </div>
       </div>
-      <div class="hero__actions reveal reveal-delay-4">
-        <a href="#contact" class="btn btn--primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Get in Touch
-        </a>
-        <a href="https://www.linkedin.com/in/nithin-n-4316027b/" target="_blank" rel="noopener" class="btn btn--outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
+
+      <!-- Certifications Column -->
+      <div class="hero__certs reveal reveal-delay-2" id="heroCerts">
+        <div class="cyber-shield-container">
+          <svg class="cyber-shield-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <div class="cert-carousel-3d">
+            <div class="proto-cert-3d" style="--i:0;">ISC2</div>
+            <div class="proto-cert-3d" style="--i:1;">Microsoft</div>
+            <div class="proto-cert-3d" style="--i:2;">ITIL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Image -->
+      <div class="hero__image-wrapper reveal reveal-delay-2">
+        <div class="hero__bubble" id="heroBubble">Hey! ðŸ›¡ï¸</div>
+        <div class="hero__image-frame" id="profileFrame">
+          <img src="profile.jpg" alt="Nithin N - Cyber Defence Engineer" class="hero__image">
+          <div class="hero__image-border"></div>
+          <div class="hero__image-corner hero__image-corner--tl"></div>
+          <div class="hero__image-corner hero__image-corner--tr"></div>
+          <div class="hero__image-corner hero__image-corner--bl"></div>
+          <div class="hero__image-corner hero__image-corner--br"></div>
+        </div>
+        <div class="hero__image-tag">
+          <span class="hero__image-dot"></span>
+          ID_VERIFIED
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Technical Skills -->
+  <!-- Technical Skills + Radar -->
   <section class="section skills" id="skills">
     <div class="container">
       <div class="section__header reveal">
-        <div class="section__label">Expertise</div>
-        <h2 class="section__title">Technical Arsenal</h2>
-        <div class="section__divider"></div>
+        <div class="section__label">scanning_capabilities</div>
+        <h2 class="section__title" data-decrypt="true">Technical Arsenal</h2>
       </div>
-      <div class="skills__grid">
 
+      <!-- Radar Chart -->
+      <div class="radar-section reveal">
+        <div class="radar-container" id="radarChart"></div>
+        <div class="radar-legend">
+          <div class="radar-legend__item"><span class="radar-legend__dot"></span> Proficiency Level</div>
+          <div class="radar-legend__note">Hover axes for details</div>
+        </div>
+      </div>
+
+      <div class="skills__grid">
         <div class="skill-card reveal">
-          <div class="skill-card__icon">🛡️</div>
-          <h3 class="skill-card__title">EDR & Endpoint Protection</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">EDR & Endpoint</h3>
+            <span class="skill-card__level skill-card__level--critical">Primary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">CrowdStrike Falcon</span>
             <span class="tag">Carbon Black</span>
@@ -102,8 +203,10 @@
         </div>
 
         <div class="skill-card reveal reveal-delay-1">
-          <div class="skill-card__icon">🔍</div>
-          <h3 class="skill-card__title">Vulnerability & Threat Management</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">Vuln & Threat Mgmt</h3>
+            <span class="skill-card__level skill-card__level--critical">Primary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">Tenable</span>
             <span class="tag">Rapid7</span>
@@ -115,8 +218,10 @@
         </div>
 
         <div class="skill-card reveal reveal-delay-2">
-          <div class="skill-card__icon">📧</div>
-          <h3 class="skill-card__title">Email, Web & App Security</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">Email, Web & App Sec</h3>
+            <span class="skill-card__level skill-card__level--critical">Primary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">Proofpoint</span>
             <span class="tag">Abnormal Security</span>
@@ -129,8 +234,10 @@
         </div>
 
         <div class="skill-card reveal reveal-delay-3">
-          <div class="skill-card__icon">📱</div>
-          <h3 class="skill-card__title">Mobile Security</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">Mobile Security</h3>
+            <span class="skill-card__level skill-card__level--high">Secondary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">Zimperium</span>
             <span class="tag">Microsoft Intune</span>
@@ -139,8 +246,10 @@
         </div>
 
         <div class="skill-card reveal">
-          <div class="skill-card__icon">📊</div>
-          <h3 class="skill-card__title">SIEM, SOC & Automation</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">SIEM, SOC & Auto</h3>
+            <span class="skill-card__level skill-card__level--critical">Primary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">QRadar</span>
             <span class="tag">Google SecOps</span>
@@ -151,8 +260,10 @@
         </div>
 
         <div class="skill-card reveal reveal-delay-1">
-          <div class="skill-card__icon">🖥️</div>
-          <h3 class="skill-card__title">Infrastructure & Platforms</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">Infrastructure</h3>
+            <span class="skill-card__level skill-card__level--high">Secondary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">Windows</span>
             <span class="tag">Linux</span>
@@ -164,8 +275,10 @@
         </div>
 
         <div class="skill-card reveal reveal-delay-2">
-          <div class="skill-card__icon">⌨️</div>
-          <h3 class="skill-card__title">Programming & Scripting</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">Programming</h3>
+            <span class="skill-card__level skill-card__level--high">Secondary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">Python</span>
             <span class="tag">Java</span>
@@ -177,16 +290,17 @@
         </div>
 
         <div class="skill-card reveal reveal-delay-3">
-          <div class="skill-card__icon">📋</div>
-          <h3 class="skill-card__title">Frameworks & Governance</h3>
+          <div class="skill-card__header">
+            <h3 class="skill-card__title">Governance</h3>
+            <span class="skill-card__level skill-card__level--critical">Primary</span>
+          </div>
           <div class="skill-card__tags">
             <span class="tag">CIS Controls</span>
             <span class="tag">ISO Audits</span>
             <span class="tag">BAS</span>
-            <span class="tag">KPI/KCI Reporting</span>
+            <span class="tag">KPI/KCI</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -195,149 +309,187 @@
   <section class="section" id="experience">
     <div class="container">
       <div class="section__header reveal">
-        <div class="section__label">Career</div>
-        <h2 class="section__title">Professional Experience</h2>
-        <div class="section__divider"></div>
+        <div class="section__label">load_career_history</div>
+        <h2 class="section__title" data-decrypt="true">Professional Experience</h2>
       </div>
       <div class="timeline">
-
-        <!-- Lead Info Sec Engineer -->
         <div class="timeline__item reveal">
           <div class="timeline__dot"></div>
-          <div class="timeline__period">2024 — Present</div>
-          <h3 class="timeline__role">Lead Information Security Engineer</h3>
+          <div class="timeline__header">
+            <h3 class="timeline__role">Lead Information Security Engineer</h3>
+            <span class="timeline__period">2024 - Present</span>
+          </div>
           <div class="timeline__company">Enterprise Cyber Defence</div>
           <ul class="timeline__achievements">
-            <li>Lead WAF security strategy across F5, Akamai, Azure, and AWS — building baseline policies, an application-aware deployment roadmap, and SIEM-integrated monitoring use cases enterprise-wide.</li>
-            <li>Own email security defense strategy on a layered Proofpoint + Abnormal Security model; built SOC playbooks, detection use cases, and QRadar rules spanning EDR, MTD, and email telemetry.</li>
-            <li>Designed and led SOAR automation using CrowdStrike workflows, removing manual triage overhead entirely and cutting incoming operations tickets by ~15%.</li>
-            <li>Negotiated CrowdStrike renewal terms that reduced licensing costs by $150K+.</li>
-            <li>Led response to the 2024 CrowdStrike outage: contained impact by blocking the update source at the firewall (protecting ~60% of the server estate), then built and deployed automated recovery scripts across affected endpoints.</li>
-            <li>Raised CIS benchmark compliance to 75%, the highest level achieved by the organization to date.</li>
-            <li>Stepped up to lead the SOC on short notice following the team's sudden departure, running investigations and escalations alongside primary engineering responsibilities.</li>
-            <li>Built the organization's first MITRE ATT&CK heatmap to evaluate detection coverage, and introduced breach-and-attack simulation (Picus) as an ongoing program.</li>
-            <li>Launched proactive threat hunting and deliver monthly cyber threat intelligence briefings to leadership.</li>
+            <li>Lead WAF security strategy across F5, Akamai, Azure, and AWS - building baseline policies, an application-aware deployment roadmap, and SIEM-integrated monitoring use cases enterprise-wide.</li>
+            <li>Own email security defense on a layered Proofpoint + Abnormal Security model; built SOC playbooks, detection use cases, and QRadar rules spanning EDR, MTD, and email telemetry.</li>
+            <li>Designed SOAR automation using CrowdStrike workflows, removing manual triage entirely and cutting operations tickets by ~15%.</li>
+            <li>Negotiated CrowdStrike renewal terms - reduced licensing costs by $150K+.</li>
+            <li>Led response to the 2024 CrowdStrike outage: contained impact by blocking the update source at the firewall (protecting ~60% of the server estate), deployed automated recovery scripts.</li>
+            <li>Raised CIS benchmark compliance to 75% - the highest level achieved by the organization.</li>
+            <li>Stepped up to lead the SOC on short notice after the team's sudden departure, running investigations and escalations alongside primary engineering duties.</li>
+            <li>Built the organization's first MITRE ATT&CK heatmap and introduced breach-and-attack simulation (Picus) as an ongoing program.</li>
+            <li>Launched proactive threat hunting and monthly cyber threat intelligence briefings to leadership.</li>
           </ul>
         </div>
-
-        <!-- Senior Info Sec Engineer -->
         <div class="timeline__item reveal">
           <div class="timeline__dot"></div>
-          <div class="timeline__period">2022 — 2023</div>
-          <h3 class="timeline__role">Senior Information Security Engineer</h3>
+          <div class="timeline__header">
+            <h3 class="timeline__role">Senior Information Security Engineer</h3>
+            <span class="timeline__period">2022 - 2023</span>
+          </div>
           <div class="timeline__company">Enterprise Cyber Defence</div>
           <ul class="timeline__achievements">
-            <li>Owned the enterprise-wide migration from Carbon Black to CrowdStrike with zero customer impact, leading SCCM-based agent deployment, policy configuration, documentation, and operations team training.</li>
-            <li>Served as security lead for the Athena project, architecting security baselines across network, database, VDI, containers, and VMware; recognized by senior leadership for the transition.</li>
-            <li>Took ownership of vulnerability management, automating NVD-based critical vulnerability alerting and scan scheduling — reducing open vulnerabilities by ~60%.</li>
-            <li>Managed and mentored the security operations team; built SOC playbooks and represented the team in ISO audits, with the malware management process specifically commended by the auditor.</li>
-            <li>Proposed and piloted an XDR strategy, and arranged CrowdStrike University training access for the team.</li>
-            <li>Automated security scanning in the build pipeline using Jenkins and Docker, removing manual gating from the release process.</li>
-            <li>Formalized mobile security operations (Zimperium MTD) with Intune-based auto-deployment and CIS control alignment.</li>
+            <li>Owned enterprise-wide migration from Carbon Black to CrowdStrike with zero customer impact - led SCCM deployment, policy config, documentation, and team training.</li>
+            <li>Security lead for the Athena project: architected baselines across network, database, VDI, containers, and VMware; recognized by senior leadership.</li>
+            <li>Automated NVD-based critical vulnerability alerting and scan scheduling - reduced open vulnerabilities by ~60%.</li>
+            <li>Managed and mentored the SOC team; built playbooks and represented the team in ISO audits - malware management process specifically commended by auditor.</li>
+            <li>Proposed and piloted an XDR strategy; arranged CrowdStrike University training for the team.</li>
+            <li>Automated security scanning in the CI/CD pipeline using Jenkins and Docker.</li>
+            <li>Formalized mobile security ops (Zimperium MTD) with Intune-based auto-deployment and CIS control alignment.</li>
           </ul>
         </div>
-
-        <!-- Info Sec Engineer -->
         <div class="timeline__item reveal">
           <div class="timeline__dot"></div>
-          <div class="timeline__period">2019 — 2021</div>
-          <h3 class="timeline__role">Information Security Engineer</h3>
+          <div class="timeline__header">
+            <h3 class="timeline__role">Information Security Engineer</h3>
+            <span class="timeline__period">2019 - 2021</span>
+          </div>
           <div class="timeline__company">Enterprise Cyber Defence</div>
           <ul class="timeline__achievements">
-            <li>Joined the security team and progressed from operations training into hands-on endpoint tooling (Rapid7, Carbon Black), identifying and remediating operational gaps.</li>
-            <li>Piloted Tenable for vulnerability scanning and managed ongoing Rapid7 and Carbon Black operations, including patching, tuning, and agent deployment.</li>
-            <li>Built and launched the High-Risk Software (HRS) process, formalizing how risky applications are identified, communicated to users, and blocked.</li>
-            <li>Stood up mobile threat defense (Zimperium) and drove Carbon Black adoption as a mandatory precheck for VPN access.</li>
-            <li>Built a multi-engine automated scanning tool with the product development team (Sophos, Microsoft, Trend Micro, McAfee) to catch false positives before customer deployment.</li>
+            <li>Progressed from operations training into hands-on endpoint tooling (Rapid7, Carbon Black), identifying and remediating operational gaps.</li>
+            <li>Piloted Tenable for vulnerability scanning; managed Rapid7 and Carbon Black ops including patching, tuning, and agent deployment.</li>
+            <li>Built and launched the High-Risk Software (HRS) process - formalizing identification, communication, and blocking of risky applications.</li>
+            <li>Stood up mobile threat defense (Zimperium) and drove Carbon Black as a mandatory VPN access precheck.</li>
+            <li>Built a multi-engine scanning tool (Sophos, Microsoft, Trend Micro, McAfee) to catch false positives before customer deployment.</li>
             <li>Promoted for measurable improvements across endpoint and mobile security operations.</li>
           </ul>
         </div>
-
-        <!-- Intern -->
         <div class="timeline__item reveal">
           <div class="timeline__dot"></div>
-          <div class="timeline__period">2019</div>
-          <h3 class="timeline__role">Infrastructure Intern</h3>
+          <div class="timeline__header">
+            <h3 class="timeline__role">Infrastructure Intern</h3>
+            <span class="timeline__period">2019</span>
+          </div>
           <div class="timeline__company">Microfocus</div>
           <ul class="timeline__achievements">
-            <li>Trained across Linux/Windows administration, physical server assembly, storage, and firewalls; built infrastructure end-to-end.</li>
-            <li>Deployed a clustered Linux environment with load balancing and HA failover to host a production application.</li>
-            <li>Built a Java-based steganography tool and a ServiceNow API integration to auto-create tickets for service failures.</li>
+            <li>Trained across Linux/Windows administration, physical server assembly, storage, and firewalls - built infrastructure end-to-end.</li>
+            <li>Deployed a clustered Linux environment with load balancing and HA failover for production.</li>
+            <li>Built a Java-based steganography tool and ServiceNow API integration for automated ticket creation.</li>
           </ul>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Key Achievements -->
+  <!-- Impact Metrics -->
   <section class="section achievements" id="achievements">
     <div class="container">
       <div class="section__header reveal">
-        <div class="section__label">Impact</div>
-        <h2 class="section__title">Measurable Results</h2>
-        <div class="section__divider"></div>
+        <div class="section__label">threat_metrics_dashboard</div>
+        <h2 class="section__title" data-decrypt="true">Measurable Impact</h2>
       </div>
       <div class="achievements__grid">
-
-        <div class="achievement-card reveal">
+        <div class="achievement-card reveal" style="--fill: 60%;">
+          <div class="achievement-card__status"><div class="achievement-card__indicator"></div><span class="achievement-card__status-text">Resolved</span></div>
           <div class="achievement-card__metric">60%</div>
           <h3 class="achievement-card__title">Vulnerability Reduction</h3>
-          <p class="achievement-card__desc">Automated NVD-based critical vulnerability alerting and scan scheduling, cutting open vulnerabilities by 60%.</p>
+          <div class="achievement-card__bar"><div class="achievement-card__bar-fill"></div></div>
+          <p class="achievement-card__desc">Automated NVD-based alerting and scan scheduling cut open vulnerabilities by 60%.</p>
         </div>
-
-        <div class="achievement-card reveal reveal-delay-1">
+        <div class="achievement-card reveal reveal-delay-1" style="--fill: 85%;">
+          <div class="achievement-card__status"><div class="achievement-card__indicator"></div><span class="achievement-card__status-text">Confirmed</span></div>
           <div class="achievement-card__metric">$150K+</div>
           <h3 class="achievement-card__title">Vendor Cost Savings</h3>
-          <p class="achievement-card__desc">Negotiated CrowdStrike renewal terms that delivered six-figure savings to the organization.</p>
+          <div class="achievement-card__bar"><div class="achievement-card__bar-fill"></div></div>
+          <p class="achievement-card__desc">Negotiated CrowdStrike renewal terms for six-figure cost reduction.</p>
         </div>
-
-        <div class="achievement-card reveal reveal-delay-2">
+        <div class="achievement-card reveal reveal-delay-2" style="--fill: 75%;">
+          <div class="achievement-card__status"><div class="achievement-card__indicator"></div><span class="achievement-card__status-text">Active</span></div>
           <div class="achievement-card__metric">75%</div>
           <h3 class="achievement-card__title">CIS Compliance</h3>
-          <p class="achievement-card__desc">Raised CIS benchmark compliance to the highest level in company history through systematic hardening.</p>
+          <div class="achievement-card__bar"><div class="achievement-card__bar-fill"></div></div>
+          <p class="achievement-card__desc">Highest CIS benchmark compliance level in organization history.</p>
         </div>
-
-        <div class="achievement-card reveal reveal-delay-3">
+        <div class="achievement-card reveal reveal-delay-3" style="--fill: 100%;">
+          <div class="achievement-card__status"><div class="achievement-card__indicator"></div><span class="achievement-card__status-text">Complete</span></div>
           <div class="achievement-card__metric">0</div>
-          <h3 class="achievement-card__title">Zero-Impact Migrations</h3>
-          <p class="achievement-card__desc">Enterprise-wide EDR migration from Carbon Black to CrowdStrike with zero customer disruption.</p>
+          <h3 class="achievement-card__title">Zero-Impact Migration</h3>
+          <div class="achievement-card__bar"><div class="achievement-card__bar-fill"></div></div>
+          <p class="achievement-card__desc">Enterprise EDR migration - Carbon Black to CrowdStrike - zero customer disruption.</p>
         </div>
-
-        <div class="achievement-card reveal">
+        <div class="achievement-card reveal" style="--fill: 45%;">
+          <div class="achievement-card__status"><div class="achievement-card__indicator"></div><span class="achievement-card__status-text">Automated</span></div>
           <div class="achievement-card__metric">~15%</div>
           <h3 class="achievement-card__title">Ticket Reduction</h3>
-          <p class="achievement-card__desc">SOAR automation via CrowdStrike workflows removed manual triage and reduced operations tickets.</p>
+          <div class="achievement-card__bar"><div class="achievement-card__bar-fill"></div></div>
+          <p class="achievement-card__desc">SOAR automation removed manual triage, cutting operations tickets.</p>
         </div>
-
-        <div class="achievement-card reveal reveal-delay-1">
+        <div class="achievement-card reveal reveal-delay-1" style="--fill: 60%;">
+          <div class="achievement-card__status"><div class="achievement-card__indicator"></div><span class="achievement-card__status-text">Contained</span></div>
           <div class="achievement-card__metric">~60%</div>
           <h3 class="achievement-card__title">Servers Protected</h3>
-          <p class="achievement-card__desc">During the 2024 CrowdStrike outage, firewall-level blocking protected ~60% of the server estate from impact.</p>
+          <div class="achievement-card__bar"><div class="achievement-card__bar-fill"></div></div>
+          <p class="achievement-card__desc">Firewall-level blocking during 2024 CrowdStrike outage shielded majority of servers.</p>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- Education -->
-  <section class="section" id="education">
+  <section class="section education" id="education">
     <div class="container">
       <div class="section__header reveal">
-        <div class="section__label">Education</div>
-        <h2 class="section__title">Academic Background</h2>
-        <div class="section__divider"></div>
+        <div class="section__label">credentials</div>
+        <h2 class="section__title" data-decrypt="true">Academic Background</h2>
       </div>
       <div class="education__cards">
         <div class="education-card reveal">
-          <div class="education-card__degree">Master of Computer Applications (MCA)</div>
-          <div class="education-card__school">JSS Technical University, Mysuru</div>
-          <div class="education-card__year">2016 — 2019</div>
+          <div class="education-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+          </div>
+          <div class="education-card__content">
+            <div class="education-card__degree">Master of Computer Applications (MCA)</div>
+            <div class="education-card__school">JSS Technical University, Mysuru</div>
+            <div class="education-card__year">2016 - 2019</div>
+          </div>
+          <div class="education-card__hash">SHA-256: 9a3f...c7e1</div>
         </div>
         <div class="education-card reveal reveal-delay-1">
-          <div class="education-card__degree">Bachelor of Computer Applications (BCA)</div>
-          <div class="education-card__school">Vidya Vikas First Grade College, Mysuru University</div>
-          <div class="education-card__year">2012 — 2015</div>
+          <div class="education-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+          </div>
+          <div class="education-card__content">
+            <div class="education-card__degree">Bachelor of Computer Applications (BCA)</div>
+            <div class="education-card__school">Vidya Vikas First Grade College, Mysuru University</div>
+            <div class="education-card__year">2012 - 2015</div>
+          </div>
+          <div class="education-card__hash">SHA-256: 4b7d...e2a8</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal -->
+  <section class="section terminal-section" id="terminal">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">interactive_shell</div>
+        <h2 class="section__title" data-decrypt="true">Terminal</h2>
+      </div>
+      <div class="terminal reveal">
+        <div class="terminal__bar">
+          <span class="terminal__dot terminal__dot--red"></span>
+          <span class="terminal__dot terminal__dot--yellow"></span>
+          <span class="terminal__dot terminal__dot--green"></span>
+          <span class="terminal__bar-title">nithin@cybersec - bash</span>
+        </div>
+        <div class="terminal__body" id="terminalBody">
+          <div id="terminalOutput"></div>
+          <div class="terminal__input-line">
+            <span class="terminal__prompt">visitor@nithin.sec:~$</span>
+            <input type="text" class="terminal__input" id="terminalInput" autocomplete="off" spellcheck="false" placeholder="Type 'help' to get started...">
+          </div>
         </div>
       </div>
     </div>
@@ -346,32 +498,57 @@
   <!-- Contact -->
   <section class="section contact" id="contact">
     <div class="container">
-      <div class="section__header reveal" style="text-align:center;">
-        <div class="section__label">Connect</div>
-        <h2 class="section__title">Let's Talk Security</h2>
-        <div class="section__divider" style="margin-left:auto;margin-right:auto;"></div>
+      <div class="section__header reveal">
+        <div class="section__label">establish_connection</div>
+        <h2 class="section__title" data-decrypt="true">Let's Talk Security</h2>
       </div>
-      <div class="contact__content reveal">
-        <p class="contact__text">
-          Interested in discussing cybersecurity strategy, threat intelligence, or just want to connect? 
-          I'm always open to conversations about securing the digital landscape.
-        </p>
-        <div class="contact__links">
+      <div class="contact__layout">
+        <div class="reveal">
+          <p class="contact__text">
+            Interested in cybersecurity strategy, threat intelligence, or building resilient defence programs? 
+            I'm always open to conversations about securing the digital landscape.
+          </p>
+          <div class="contact__terminal">
+            <div class="contact__terminal-bar">
+              <span class="contact__terminal-dot contact__terminal-dot--red"></span>
+              <span class="contact__terminal-dot contact__terminal-dot--yellow"></span>
+              <span class="contact__terminal-dot contact__terminal-dot--green"></span>
+              <span class="contact__terminal-title">nithin@sec ~ </span>
+            </div>
+            <div class="contact__terminal-body">
+              <div class="line"><span class="prompt-sym">â¯</span> <span class="cmd-text">cat contact.yaml</span></div>
+              <div class="line"><span class="key">name:</span> <span class="val">"Nithin N"</span></div>
+              <div class="line"><span class="key">role:</span> <span class="val">"Cyber Defence Engineer"</span></div>
+              <div class="line"><span class="key">location:</span> <span class="val">"Mysuru, India"</span></div>
+              <div class="line"><span class="key">status:</span> <span class="val val--active">available</span></div>
+              <div class="line"><span class="key">focus:</span></div>
+              <div class="line"><span class="key">&nbsp; -</span> <span class="val">"Cyber Defence & SOC Engineering"</span></div>
+              <div class="line"><span class="key">&nbsp; -</span> <span class="val">"Threat Intelligence & Hunting"</span></div>
+              <div class="line"><span class="key">&nbsp; -</span> <span class="val">"Security Architecture"</span></div>
+              <div class="line typing-line"><span class="prompt-sym">â¯</span> <span class="cursor-block">â–ˆ</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="contact__links reveal reveal-delay-1">
           <a href="mailto:n.nithin1993@gmail.com" class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             n.nithin1993@gmail.com
+            <span class="contact-link__arrow">â†’</span>
           </a>
           <a href="tel:+918861658888" class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             +91 886-165-8888
+            <span class="contact-link__arrow">â†’</span>
           </a>
           <a href="https://www.linkedin.com/in/nithin-n-4316027b/" target="_blank" rel="noopener" class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn Profile
+            <span class="contact-link__arrow">â†’</span>
           </a>
           <a href="#" class="contact-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Mysuru, India
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Mysuru, Karnataka, India
+            <span class="contact-link__arrow">â†’</span>
           </a>
         </div>
       </div>
@@ -381,10 +558,77 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
-      <span>&copy; 2026 Nithin N. All rights reserved.</span>
-      <span class="footer__mono">Built with precision. Defended by design.</span>
+      <div class="footer__left">
+        <div class="footer__logo">NITHIN.SEC</div>
+        <div class="footer__tagline">Cyber Defence Engineer · Information Security</div>
+      </div>
+      <div class="footer__center">
+        <div class="footer__status">
+          <span class="footer__status-dot"></span>
+          <span>All systems operational</span>
+        </div>
+        <span class="footer__copy">&copy; 2026 Nithin N. All rights reserved.</span>
+      </div>
+      <div class="footer__right">
+        <div class="footer__quote">Defended by Avengers</div>
+      </div>
     </div>
   </footer>
+
+  <!-- Print-only Resume -->
+  <div id="printResume" class="print-resume">
+    <h1>Nithin N</h1>
+    <p class="print-subtitle">Cyber Defence Engineer | Information Security</p>
+    <p class="print-contact">+91 8861658888 · n.nithin1993@gmail.com · Mysuru, India · linkedin.com/in/nithin-n-4316027b</p>
+    <hr>
+    <h2>Professional Summary</h2>
+    <p>Cyber Defence Engineer with 7 years of experience building and operating enterprise security programs across endpoint detection & response (EDR), vulnerability management, email security, mobile threat defense, and web application firewalls (WAF). Track record of leading zero-impact tool migrations, building automation that removed manual operational overhead, and stepping into SOC leadership during critical staffing gaps. Promoted twice for measurable risk reduction, including a 60% cut in open vulnerabilities, CIS benchmark compliance raised to 75%, and $150K+ in negotiated vendor savings.</p>
+    <h2>Technical Skills</h2>
+    <p><strong>EDR & Endpoint:</strong> CrowdStrike Falcon, Carbon Black, Trend Micro, McAfee, Sophos</p>
+    <p><strong>Vulnerability & Threat:</strong> Tenable, Rapid7, NVD automation, MITRE ATT&CK, Picus, AttackIQ</p>
+    <p><strong>Email, Web & App:</strong> Proofpoint, Abnormal Security, F5, Akamai, Azure WAF, AWS WAF, Prisma Cloud</p>
+    <p><strong>Mobile:</strong> Zimperium, Microsoft Intune, MTD</p>
+    <p><strong>Infrastructure:</strong> Windows, Linux, VMware, SCCM, GPO</p>
+    <p><strong>Programming:</strong> Python, Java, PHP, MySQL, JavaScript, C</p>
+    <p><strong>Governance:</strong> CIS Controls, ISO audits, BAS, KPI/KCI reporting</p>
+    <h2>Professional Experience</h2>
+    <h3>Lead Information Security Engineer <span style="float:right;font-weight:normal;font-size:0.9em;">2024 - Present</span></h3>
+    <ul>
+      <li>Lead WAF security strategy across F5, Akamai, Azure, and AWS - baseline policies, deployment roadmap, SIEM-integrated monitoring.</li>
+      <li>Own email security defense on layered Proofpoint + Abnormal Security; built SOC playbooks and QRadar rules.</li>
+      <li>Designed SOAR automation using CrowdStrike workflows, cutting operations tickets by ~15%.</li>
+      <li>Negotiated CrowdStrike renewal - reduced licensing costs by $150K+.</li>
+      <li>Led 2024 CrowdStrike outage response, protecting ~60% of server estate via firewall blocking.</li>
+      <li>Raised CIS benchmark compliance to 75%, highest in organization history.</li>
+      <li>Stepped up to lead SOC during critical staffing gap.</li>
+      <li>Built first MITRE ATT&CK heatmap; introduced Picus BAS program.</li>
+      <li>Launched threat hunting and monthly CTI briefings to leadership.</li>
+    </ul>
+    <h3>Senior Information Security Engineer <span style="float:right;font-weight:normal;font-size:0.9em;">2022 - 2023</span></h3>
+    <ul>
+      <li>Enterprise-wide Carbon Black to CrowdStrike migration with zero customer impact.</li>
+      <li>Security lead for Athena project - architected baselines across network, database, VDI, containers, VMware.</li>
+      <li>Automated vulnerability alerting and scheduling - reduced open vulnerabilities by ~60%.</li>
+      <li>Managed SOC team; built playbooks; represented team in ISO audits (malware process commended).</li>
+      <li>Piloted XDR strategy; automated CI/CD security scanning with Jenkins and Docker.</li>
+      <li>Formalized Zimperium MTD with Intune auto-deployment and CIS alignment.</li>
+    </ul>
+    <h3>Information Security Engineer <span style="float:right;font-weight:normal;font-size:0.9em;">2019 - 2021</span></h3>
+    <ul>
+      <li>Hands-on Rapid7 and Carbon Black operations - patching, tuning, agent deployment.</li>
+      <li>Piloted Tenable; built High-Risk Software process; stood up Zimperium MTD.</li>
+      <li>Built multi-engine scanning tool to catch false positives before deployment.</li>
+      <li>Promoted for measurable improvements across endpoint and mobile security.</li>
+    </ul>
+    <h3>Infrastructure Intern - Microfocus <span style="float:right;font-weight:normal;font-size:0.9em;">2019</span></h3>
+    <ul>
+      <li>Linux/Windows admin, server assembly, storage, firewalls. Deployed clustered HA environment.</li>
+      <li>Built Java steganography tool and ServiceNow API integration.</li>
+    </ul>
+    <h2>Education</h2>
+    <p><strong>MCA</strong> - JSS Technical University, Mysuru (2016-2019)</p>
+    <p><strong>BCA</strong> - Vidya Vikas First Grade College, Mysuru University (2012-2015)</p>
+  </div>
 
   <script src="script.js"></script>
 </body>
